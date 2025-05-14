@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Essoufimohamed/sms-jadara/issues"
+    "url": "https://github.com/Essoufimohamed/jadara-management-system/issues"
   },
-  "homepage": "https://github.com/Essoufimohamed/sms-jadara#readme",
+  "homepage": "https://github.com/Essoufimohamed/jadara-management-system#readme",
   "description": "",
   "dependencies": {
     "body-parser": "^2.2.0",

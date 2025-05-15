@@ -16,7 +16,6 @@ app.use(express.json());
 
 // Basic test route
 app.get("/", (req, res) => {
-app.use("/group", (req, res) => {
     res.send("hello scriptman");
 });
 

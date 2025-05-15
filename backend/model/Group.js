@@ -11,5 +11,4 @@ const groupSchema = new mongoose.Schema({
     },
 });
 
-
 export default mongoose.model("Group", groupSchema);

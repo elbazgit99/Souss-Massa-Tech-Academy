@@ -7,16 +7,16 @@ import {
     updateCourse,
 } from "../controller/courseController.js";
 
-const router = express.Router();
+const courseRouters = express.Router();
 
-router.get("/", getCourses);
+courseRouters.get("/courses", getCourses);
 
-router.get("/:id", getCourse);
+courseRouters.get("/courses/:id", getCourse);
 
-router.post("/", createCourse);
+courseRouters.post("/courses", createCourse);
 
-router.delete("/:id", deleteCourse);
+courseRouters.delete("/courses/:id", deleteCourse);
 
-router.patch("/:id", updateCourse);
+courseRouters.patch("/courses/:id", updateCourse);
 
-export default router;
+export default courseRouters;

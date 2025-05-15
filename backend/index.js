@@ -1,21 +1,34 @@
 import express, { Router } from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./config/database.js";
-import router from "./routes/courseRoute.js";
-import userRoutes from "./routes/userRoutes.js"; // Import user userRoutes
+
+import courseRouters from "./routes/courseRoute.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 const app = express();
 
+const PORT = process.env.PORT || 5000;
+
 // Middleware to parse JSON
 app.use(express.json());
 
+// Basic test route
 app.get("/", (req, res) => {
     res.send("hello scriptman");
 });
 
-// create serveur
-app.listen(PORT, () => {
-    connectDB;
-    console.log(`server connected in port ${PORT}`);
-});
+// Register API routes
+app.use("/api", userRoutes);
+app.use("/api", courseRouters);
+
+// Connect to DB and start server
+await connectDB()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error("Failed to connect to DB", error);
+    });

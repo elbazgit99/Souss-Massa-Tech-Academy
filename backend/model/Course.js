@@ -9,5 +9,5 @@ const courseSchema = mongoose.Schema({
         type: Number,
     },
 });
-
-export default mongoose.model("Course", courseSchema);
+const Course = mongoose.model("Course", courseSchema);
+export default Course;

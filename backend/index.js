@@ -4,6 +4,7 @@ import { connectDB } from "./config/database.js";
 
 import courseRouters from "./routes/courseRoute.js";
 import userRoutes from "./routes/userRoutes.js";
+import groupRouter from "./routes/groupRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 // Register API routes
 app.use("/api", userRoutes);
 app.use("/api", courseRouters);
+app.use("/api", groupRouter);
 
 // Connect to DB and start server
 await connectDB()

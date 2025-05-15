@@ -7,7 +7,7 @@ const app = express();
 
 const PORT = process.env.PORT;
 
-app.get("/", (req, res) => {
+app.use("/group", (req, res) => {
     res.send("hello scriptman");
 });
 

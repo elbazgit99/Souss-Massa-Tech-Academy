@@ -5,6 +5,7 @@ import { connectDB } from "./config/database.js";
 import courseRouters from "./routes/courseRoute.js";
 import userRoutes from "./routes/userRoutes.js";
 import groupRouter from "./routes/groupRoutes.js";
+import roleRoutes from "./routes/roleRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -19,10 +20,11 @@ app.get("/", (req, res) => {
     res.send("hello scriptman");
 });
 
-// Register API routes
+// API routes
 app.use("/api", userRoutes);
 app.use("/api", courseRouters);
 app.use("/api", groupRouter);
+app.use("/api", roleRoutes);
 
 // Connect to DB and start server
 await connectDB()

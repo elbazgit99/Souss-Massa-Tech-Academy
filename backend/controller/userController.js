@@ -1,4 +1,5 @@
 import User from "../model/User.js";
+import Role from "../model/Role.js";
 import bcrypt from "bcryptjs";
 import validator from "validator";
 import jwt from "jsonwebtoken";

@@ -11,7 +11,7 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export function RegisterForm({

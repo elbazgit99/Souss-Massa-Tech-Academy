@@ -10,15 +10,15 @@ export const registerUser = async (req, res) => {
         const { email, password, username, role } = req.body;
 
         // validation
-        if (!email || !password) {
-            res.status(400).json({ message: "all feilds must be failed" });
-        }
-        if (!validator.isEmail(email)) {
-            res.status(400).json({ message: "email is not valid" });
-        }
-        if (!validator.isStrongPassword(password)) {
-            res.status(400).json({ message: "password is not strong" });
-        }
+        // if (!email || !password) {
+        //     res.status(400).json({ message: "all feilds must be failed" });
+        // }
+        // if (!validator.isEmail(email)) {
+        //     res.status(400).json({ message: "email is not valid" });
+        // }
+        // if (!validator.isStrongPassword(password)) {
+        //     res.status(400).json({ message: "password is not strong" });
+        // }
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
@@ -61,6 +61,7 @@ export const userlogin = async (req, res) => {
             return res.status(400).json({ message: "invalid password" });
         }
 
+        return res.status(201).json({ message: "login succefully", user });
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRIT, {
             expiresIn: "30min",
         });

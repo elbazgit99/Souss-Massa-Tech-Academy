@@ -14,6 +14,8 @@ import { Label } from "./ui/label";
 import { useState } from "react";
 import axios from "axios";
 
+import { useNavigate } from "react-router";
+
 export function RegisterForm({
     className,
     ...props
@@ -21,6 +23,8 @@ export function RegisterForm({
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+
+    const navigate = useNavigate();
 
     function sendUser(e) {
         e.preventDefault();
@@ -30,7 +34,10 @@ export function RegisterForm({
                 email,
                 password,
             })
-            .then((res) => console.log(res.data))
+            .then((res) => {
+                console.log(res.data);
+                navigate("/login");
+            })
             .catch((error) => console.log(error.message));
     }
     // useEffect(() => {
@@ -90,7 +97,7 @@ export function RegisterForm({
                                         }
                                     />
                                 </div>
-                                <Button type="submit" className="w-full">
+                                <Button type="submit" className="w-full ">
                                     Register
                                 </Button>
                             </div>

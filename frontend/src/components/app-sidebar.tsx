@@ -1,274 +1,118 @@
 import * as React from "react";
 import {
-  AudioWaveform,
-  Blocks,
-  Calendar,
-  Command,
-  Home,
-  Inbox,
-  MessageCircleQuestion,
-  Search,
-  Settings2,
-  Sparkles,
-  Trash2,
+    // AudioWaveform,
+    Blocks,
+    Calendar,
+    // Command,
+    Home,
+    Inbox,
+    MessageCircleQuestion,
+    Search,
+    Settings2,
+    Sparkles,
+    Trash2,
 } from "lucide-react";
 
-import { NavFavorites } from "../components/nav-favorites";
 import { NavMain } from "../components/nav-main";
 import { NavSecondary } from "../components/nav-secondary";
-import { NavWorkspaces } from "../components/nav-workspaces";
-import { TeamSwitcher } from "../components/team-switcher";
+import logo from "/src/assets/fondation-logo.png";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarRail,
+    Sidebar,
+    SidebarContent,
+    SidebarHeader,
+    SidebarRail,
 } from "../components/ui/sidebar";
 
 // This is sample data.
 const data = {
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: Command,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
-  navMain: [
-    {
-      title: "Search",
-      url: "#",
-      icon: Search,
-    },
-    {
-      title: "Users",
-      url: "#",
-      icon: Sparkles,
-    },
-    {
-      title: "Home",
-      url: "#",
-      icon: Home,
-      isActive: true,
-    },
-    {
-      title: "Inbox",
-      url: "#",
-      icon: Inbox,
-      badge: "10",
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Calendar",
-      url: "#",
-      icon: Calendar,
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-    },
-    {
-      title: "Templates",
-      url: "#",
-      icon: Blocks,
-    },
-    {
-      title: "Trash",
-      url: "#",
-      icon: Trash2,
-    },
-    {
-      title: "Help",
-      url: "#",
-      icon: MessageCircleQuestion,
-    },
-  ],
-  favorites: [
-    {
-      name: "Project Management & Task Tracking",
-      url: "#",
-      emoji: "📊",
-    },
-    {
-      name: "Family Recipe Collection & Meal Planning",
-      url: "#",
-      emoji: "🍳",
-    },
-    {
-      name: "Fitness Tracker & Workout Routines",
-      url: "#",
-      emoji: "💪",
-    },
-    {
-      name: "Book Notes & Reading List",
-      url: "#",
-      emoji: "📚",
-    },
-    {
-      name: "Sustainable Gardening Tips & Plant Care",
-      url: "#",
-      emoji: "🌱",
-    },
-    {
-      name: "Language Learning Progress & Resources",
-      url: "#",
-      emoji: "🗣️",
-    },
-    {
-      name: "Home Renovation Ideas & Budget Tracker",
-      url: "#",
-      emoji: "🏠",
-    },
-    {
-      name: "Personal Finance & Investment Portfolio",
-      url: "#",
-      emoji: "💰",
-    },
-    {
-      name: "Movie & TV Show Watchlist with Reviews",
-      url: "#",
-      emoji: "🎬",
-    },
-    {
-      name: "Daily Habit Tracker & Goal Setting",
-      url: "#",
-      emoji: "✅",
-    },
-  ],
-  workspaces: [
-    {
-      name: "Personal Life Management",
-      emoji: "🏠",
-      pages: [
+    // teams: [
+    //     {
+    //         name: "Jadara Management",
+    //         logo: Command,
+    //         plan: "Enterprise",
+    //     },
+    //     {
+    //         name: "Acme Corp.",
+    //         logo: AudioWaveform,
+    //         plan: "Startup",
+    //     },
+    //     {
+    //         name: "Evil Corp.",
+    //         logo: Command,
+    //         plan: "Free",
+    //     },
+    // ],
+    navMain: [
         {
-          name: "Daily Journal & Reflection",
-          url: "#",
-          emoji: "📔",
+            title: "Home",
+            url: "/dash-home/",
+            icon: Home,
+            // isActive: true,
         },
         {
-          name: "Health & Wellness Tracker",
-          url: "#",
-          emoji: "🍏",
+            title: "Search",
+            url: "#",
+            icon: Search,
         },
         {
-          name: "Personal Growth & Learning Goals",
-          url: "#",
-          emoji: "🌟",
+            title: "Users",
+            url: "/dash-home/users",
+            icon: Sparkles,
         },
-      ],
-    },
-    {
-      name: "Professional Development",
-      emoji: "💼",
-      pages: [
+
         {
-          name: "Career Objectives & Milestones",
-          url: "#",
-          emoji: "🎯",
+            title: "Cours",
+            url: "/dash-home/courses",
+            icon: Inbox,
+            badge: "10",
         },
+    ],
+    navSecondary: [
         {
-          name: "Skill Acquisition & Training Log",
-          url: "#",
-          emoji: "🧠",
+            title: "Calendar",
+            url: "#",
+            icon: Calendar,
         },
         {
-          name: "Networking Contacts & Events",
-          url: "#",
-          emoji: "🤝",
-        },
-      ],
-    },
-    {
-      name: "Creative Projects",
-      emoji: "🎨",
-      pages: [
-        {
-          name: "Writing Ideas & Story Outlines",
-          url: "#",
-          emoji: "✍️",
+            title: "Settings",
+            url: "#",
+            icon: Settings2,
         },
         {
-          name: "Art & Design Portfolio",
-          url: "#",
-          emoji: "🖼️",
+            title: "Templates",
+            url: "#",
+            icon: Blocks,
         },
         {
-          name: "Music Composition & Practice Log",
-          url: "#",
-          emoji: "🎵",
-        },
-      ],
-    },
-    {
-      name: "Home Management",
-      emoji: "🏡",
-      pages: [
-        {
-          name: "Household Budget & Expense Tracking",
-          url: "#",
-          emoji: "💰",
+            title: "Trash",
+            url: "#",
+            icon: Trash2,
         },
         {
-          name: "Home Maintenance Schedule & Tasks",
-          url: "#",
-          emoji: "🔧",
+            title: "Help",
+            url: "#",
+            icon: MessageCircleQuestion,
         },
-        {
-          name: "Family Calendar & Event Planning",
-          url: "#",
-          emoji: "📅",
-        },
-      ],
-    },
-    {
-      name: "Travel & Adventure",
-      emoji: "🧳",
-      pages: [
-        {
-          name: "Trip Planning & Itineraries",
-          url: "#",
-          emoji: "🗺️",
-        },
-        {
-          name: "Travel Bucket List & Inspiration",
-          url: "#",
-          emoji: "🌎",
-        },
-        {
-          name: "Travel Journal & Photo Gallery",
-          url: "#",
-          emoji: "📸",
-        },
-      ],
-    },
-  ],
+    ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <Sidebar className="border-r-0" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-        <NavMain items={data.navMain} />
-      </SidebarHeader>
-      <SidebarContent>
-        <NavFavorites favorites={data.favorites} />
-        <NavWorkspaces workspaces={data.workspaces} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
-      </SidebarContent>
-      <SidebarRail />
-    </Sidebar>
-  );
+    return (
+        <Sidebar className="border-r-0" {...props}>
+            <SidebarHeader>
+                <div className="flex items-center gap-4 mb-3">
+                    <img src={logo} alt="" className="w-9" />
+                    <span>
+                        <strong>Jadara Management</strong>
+                    </span>
+                </div>
+
+                <NavMain items={data.navMain} />
+            </SidebarHeader>
+            <SidebarContent>
+                <NavSecondary items={data.navSecondary} className="mt-auto" />
+            </SidebarContent>
+            <SidebarRail />
+        </Sidebar>
+    );
 }

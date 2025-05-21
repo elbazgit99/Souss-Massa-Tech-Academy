@@ -10,11 +10,32 @@ import {
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 export function LoginForm({
     className,
     ...props
 }: React.ComponentProps<"div">) {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    function loginUser(e) {
+        e.preventDefault();
+        axios
+            .post("http://localhost:5000/api/login/", {
+                email,
+                password,
+            })
+            .then((res) => {
+                console.log(res.data);
+                navigate("/dash-home");
+            })
+            .catch((error) => console.log(error.message));
+    }
+
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card>
@@ -23,7 +44,7 @@ export function LoginForm({
                     <CardDescription>Login with your email</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form>
+                    <form onSubmit={loginUser}>
                         <div className="grid gap-6">
                             <div className="grid gap-6">
                                 <div className="grid gap-3">
@@ -33,6 +54,9 @@ export function LoginForm({
                                         type="email"
                                         placeholder="m@example.com"
                                         required
+                                        onChange={(e) => {
+                                            setEmail(e.target.value);
+                                        }}
                                     />
                                 </div>
                                 <div className="grid gap-3">
@@ -40,20 +64,27 @@ export function LoginForm({
                                         <Label htmlFor="password">
                                             Password
                                         </Label>
-                                        <a
+                                        {/* <a
                                             href="#"
                                             className="ml-auto text-sm underline-offset-4 hover:underline"
                                         >
                                             Forgot your password?
-                                        </a>
+                                        </a> */}
                                     </div>
                                     <Input
                                         id="password"
                                         type="password"
+                                        placeholder="Your passeword **"
                                         required
+                                        onChange={(e) => {
+                                            setPassword(e.target.value);
+                                        }}
                                     />
                                 </div>
-                                <Button type="submit" className="w-full">
+                                <Button
+                                    type="submit"
+                                    className="w-full bg-cyan-900"
+                                >
                                     Login
                                 </Button>
                             </div>

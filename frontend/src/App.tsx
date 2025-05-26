@@ -6,6 +6,7 @@ import RegisterPage from "./features/layout/register";
 import HomePage from "./features/pages/HomePage";
 import DashHome from "./features/layout/dash-home";
 import { TableUsers } from "./components/table-users";
+import GroupsTable from "./features/layout/groupsPages"
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route element={<DashHome />} />
                     <Route path="/dash-home/users" element={<TableUsers />} />
                     <Route path="/dash-home/courses" element={<DashHome />} />
+                    <Route path="/dash-home/groups" element={<GroupsTable />} />
                 </Route>
             </Routes>
         </>

@@ -1,12 +1,12 @@
 import { Link } from "react-router";
-import { cn } from "../lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -17,8 +17,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 export function RegisterForm({
-    className,
-    ...props
+  className,
+  ...props
 }: React.ComponentProps<"div">) {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
@@ -105,22 +105,7 @@ export function RegisterForm({
                                         }
                                     />
                                 </div>
-                                {/* <div className="grid gap-3">
-                                    <div className="flex items-center">
-                                        <Label htmlFor="password">
-                                            Confirme Password
-                                        </Label>
-                                    </div>
-                                    <Input
-                                        id="passwordConferme"
-                                        type="password"
-                                        placeholder="*********"
-                                        required
-                                        onChange={(e) =>
-                                            setPasswordConferme(e.target.value)
-                                        }
-                                    />
-                                </div> */}
+                                
                                 <Button
                                     type="submit"
                                     className="w-full bg-cyan-900"
@@ -146,6 +131,6 @@ export function RegisterForm({
                 <a href="#">Terms of Service</a> and{" "}
                 <a href="#">Privacy Policy</a>.
             </div> */}
-        </div>
-    );
+    </div>
+  );
 }

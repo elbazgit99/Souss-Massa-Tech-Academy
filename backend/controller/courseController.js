@@ -1,64 +1,26 @@
 import Course from "../model/Course.js";
 
-// create
 export const createCourse = async (req, res) => {
-    const { title, coures_dure } = req.body;
-
     try {
-        const create = await Course.create({ title, coures_dure });
-        res.status(200).json(create);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
+        const course = new Course(req.body);
+        await course.save();
+        res.status(201).json(course);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
     }
 };
 
-// get all courses
-export const getCourses = async (req, res) => {
-    try {
-        const courses = await Course.find({});
-        res.status(200).json(courses);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
+export const getAllCourses = async (req, res) => {
+    const courses = await Course.find();
+    res.json(courses);
 };
 
-// get one course
-export const getCourse = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const course = await Course.findById(id);
-
-        if (!course) {
-            res.status(404).json({ error: "Not Found" });
-        }
-
-        res.status(200).json(course);
-    } catch (error) {
-        res.status(500).json({
-            error: "somthing wrong",
-        });
-    }
+export const getCourseById = async (req, res) => {
+    const course = await Course.findById(req.params.id);
+    if (!course) return res.status(404).json({ error: "Course not found" });
+    res.json(course);
 };
 
-// delete course
-export const deleteCourse = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const course = await Course.findOneAndDelete({ _id: id });
-
-        if (!course) {
-            res.status(404).json({ error: "Not Found" });
-        }
-
-        res.status(200).json(course);
-    } catch (error) {
-        res.status(500).json({ error: "somthing wrong" });
-    }
-};
-
-// update course
 export const updateCourse = async (req, res) => {
     const { id } = req.params;
 
@@ -75,4 +37,8 @@ export const updateCourse = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: "somthing wrong" });
     }
+};
+export const deleteCourse = async (req, res) => {
+    await Course.findByIdAndDelete(req.params.id);
+    res.json({ message: "Course deleted" });
 };

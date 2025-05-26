@@ -12,8 +12,8 @@ import {
 import { UserRoundPen, Trash2 } from "lucide-react";
 
 import axios from "axios";
-import updateicon from "../assets/icons/pen.png";
-import deleteicon from "../assets/icons/delete.png";
+// import updateicon from "../assets/icons/pen.png";
+// import deleteicon from "../assets/icons/delete.png";
 import usericon from "../assets/icons/user.png";
 import { Link } from "react-router";
 import DeleteConforme from "./delete-conforme";
@@ -100,25 +100,11 @@ export function TableUsers() {
                                             <Link
                                                 to={`/dash-home/users/update/${user._id}`}
                                             >
-                                                {/* <img
-                                                    src={updateicon}
-                                                    className="w-6"
-                                                    alt=""
-                                                /> */}
+                                                
                                                 <UserRoundPen />
                                             </Link>
 
-                                            {/* <img
-                                                onClick={() => {
-                                                    setDeleteUser(
-                                                        `${user._id}`
-                                                    );
-                                                    setPopup(true);
-                                                }}
-                                                src={deleteicon}
-                                                className="w-6"
-                                                alt=""
-                                            /> */}
+                                            
                                             <Trash2
                                                 className="text-red"
                                                 onClick={() => {

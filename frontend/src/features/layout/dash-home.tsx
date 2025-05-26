@@ -1,20 +1,10 @@
 import { Outlet } from "react-router";
 import { AppSidebar } from "../../components/app-sidebar";
-// import { TableUsers } from "../../components/table-users";
-// import {
-//     Breadcrumb,
-//     BreadcrumbItem,
-//     BreadcrumbLink,
-//     BreadcrumbList,
-//     BreadcrumbPage,
-//     BreadcrumbSeparator,
-// } from "../../components/ui/breadcrumb";
-// import { Separator } from "../../components/ui/separator";
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
-} from "../../components/ui/sidebar";
+} from "@/components/ui/sidebar";
 import adminImg from "../../assets/admin.png";
 
 export default function DashHome() {

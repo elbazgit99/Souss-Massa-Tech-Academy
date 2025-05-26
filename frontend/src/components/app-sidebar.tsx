@@ -5,11 +5,14 @@ import {
     // Calendar,
     // Command,
     Home,
-    Inbox,
     Users,
     // MessageCircleQuestion,
-    Search,
+    // Search,
     // Settings2,
+
+    // Trash2,
+    BookOpenText,
+    Boxes,
     // Trash2,
 } from "lucide-react";
 
@@ -33,11 +36,11 @@ const data = {
             icon: Home,
             // isActive: true,
         },
-        {
-            title: "Search",
-            url: "#",
-            icon: Search,
-        },
+        // {
+        //     title: "Search",
+        //     url: "#",
+        //     icon: Search,
+        // },
         {
             title: "Users",
             url: "/dash-home/users",
@@ -45,39 +48,18 @@ const data = {
         },
 
         {
-            title: "Cours",
+            title: "Courses",
             url: "/dash-home/courses",
-            icon: Inbox,
+            icon: BookOpenText,
+            badge: "10",
+        },
+        {
+            title: "Groups",
+            url: "/dash-home/courses",
+            icon: Boxes,
             badge: "10",
         },
     ],
-    // ,navSecondary: [
-    //     {
-    //         title: "Calendar",
-    //         url: "#",
-    //         icon: Calendar,
-    //     },
-    //     {
-    //         title: "Settings",
-    //         url: "#",
-    //         icon: Settings2,
-    //     },
-    //     {
-    //         title: "Templates",
-    //         url: "#",
-    //         icon: Blocks,
-    //     },
-    //     {
-    //         title: "Trash",
-    //         url: "#",
-    //         icon: Trash2,
-    //     },
-    //     {
-    //         title: "Help",
-    //         url: "#",
-    //         icon: MessageCircleQuestion,
-    //     },
-    // ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

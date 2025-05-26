@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import axios from "axios";
+import type { Course } from "./CoursePage";
 
 type Props = {
   onCourseCreated: () => void;
+  initialData?: Course | null;
 };
 
-export default function CourseForm({ onCourseCreated }: Props) {
+export default function CourseForm({ onCourseCreated, initialData }: Props) {
   const [formData, setFormData] = useState({
     title: "",
     code: "",
@@ -18,6 +20,24 @@ export default function CourseForm({ onCourseCreated }: Props) {
   });
 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        title: initialData.title,
+        code: initialData.code,
+        description: initialData.description,
+        duration: String(initialData.duration),
+      });
+    } else {
+      setFormData({
+        title: "",
+        code: "",
+        description: "",
+        duration: "",
+      });
+    }
+  }, [initialData]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -31,28 +51,40 @@ export default function CourseForm({ onCourseCreated }: Props) {
     setLoading(true);
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/courses", {
-        ...formData,
-        duration: Number(formData.duration),
-      });
+      if (initialData?._id) {
+        // Edit mode
+        const { data } = await axios.patch(
+          `http://localhost:5000/api/courses/${initialData._id}`,
+          { ...formData, duration: Number(formData.duration) }
+        );
+        toast.success(`${data.title} updated successfully!`);
+      } else {
+        // Create mode
+        const { data } = await axios.post("http://localhost:5000/api/courses", {
+          ...formData,
+          duration: Number(formData.duration),
+        });
+        toast.success(`${data.title} created successfully!`);
+      }
 
-      toast.success(`${data.title} created successfully!`);
-      setFormData({ title: "", code: "", description: "", duration: "" });
       onCourseCreated();
+      setFormData({ title: "", code: "", description: "", duration: "" });
     } catch (error: any) {
       const errorMessage =
-        error.response?.data?.error ||
-        error.message ||
-        "Failed to create course";
+        error.response?.data?.error || error.message || "Failed to save course";
       toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
+  const isEditing = !!initialData?._id;
+
   return (
     <div className="max-w-md mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-4">Create New Course</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        {isEditing ? "Edit Course" : "Create New Course"}
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label htmlFor="title">Title</Label>
@@ -94,7 +126,13 @@ export default function CourseForm({ onCourseCreated }: Props) {
           />
         </div>
         <Button type="submit" disabled={loading} className="w-full">
-          {loading ? "Creating..." : "Create Course"}
+          {loading
+            ? isEditing
+              ? "Updating..."
+              : "Creating..."
+            : isEditing
+            ? "Update Course"
+            : "Create Course"}
         </Button>
       </form>
     </div>

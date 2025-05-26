@@ -4,7 +4,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "../../components/ui/sidebar";
+} from "@/components/ui/sidebar";
 import adminImg from "../../assets/admin.png";
 
 export default function DashHome() {

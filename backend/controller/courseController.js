@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-import express from "express";
 import Course from "../model/Course.js";
 
 // create
@@ -64,9 +62,6 @@ export const deleteCourse = async (req, res) => {
 export const updateCourse = async (req, res) => {
     const { id } = req.params;
 
-    // if (!mongoose.Types.ObjectId.isValid(id)) {
-    //     return res.status(404).json({ error: "Not found" });
-    // }
     try {
         const course = await Course.findOneAndUpdate(
             { _id: id },

@@ -23,11 +23,13 @@ export function RegisterForm({
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [success, setSuccess] = useState();
+    // const [passwordConferme, setPasswordConferme] = useState();
 
     const navigate = useNavigate();
-
     function sendUser(e) {
         e.preventDefault();
+
         axios
             .post("http://localhost:5000/api/register/", {
                 username,
@@ -36,13 +38,14 @@ export function RegisterForm({
             })
             .then((res) => {
                 console.log(res.data);
+                setSuccess(res.data.statusText);
                 navigate("/login");
             })
-            .catch((error) => console.log(error.message));
+            .catch((error) => {
+                console.log(error.response.data.message);
+                setSuccess(error.response.data.message);
+            });
     }
-    // useEffect(() => {
-    //
-    // }, []);
 
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -57,6 +60,11 @@ export function RegisterForm({
                     <form onSubmit={sendUser}>
                         <div className="grid gap-6">
                             <div className="grid gap-6">
+                                {success && (
+                                    <p className="bg-red-300 text-center capitalize rounded-sm p-2">
+                                        {success}
+                                    </p>
+                                )}
                                 <div className="grid gap-3">
                                     <Label htmlFor="email">UserName</Label>
                                     <Input
@@ -97,7 +105,26 @@ export function RegisterForm({
                                         }
                                     />
                                 </div>
-                                <Button type="submit" className="w-full ">
+                                {/* <div className="grid gap-3">
+                                    <div className="flex items-center">
+                                        <Label htmlFor="password">
+                                            Confirme Password
+                                        </Label>
+                                    </div>
+                                    <Input
+                                        id="passwordConferme"
+                                        type="password"
+                                        placeholder="*********"
+                                        required
+                                        onChange={(e) =>
+                                            setPasswordConferme(e.target.value)
+                                        }
+                                    />
+                                </div> */}
+                                <Button
+                                    type="submit"
+                                    className="w-full bg-cyan-900"
+                                >
                                     Register
                                 </Button>
                             </div>

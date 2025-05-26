@@ -13,13 +13,17 @@ import axios from "axios";
 import updateicon from "../assets/icons/pen.png";
 import deleteicon from "../assets/icons/delete.png";
 import usericon from "../assets/icons/user.png";
+import { Link } from "react-router";
 
 export function TableUsers() {
     const [users, setUsers] = useState([]);
+
     useEffect(() => {
         axios
             .get("http://localhost:5000/api/users/")
-            .then((data) => setUsers(data.data))
+            .then((data) => {
+                setUsers(data.data);
+            })
             .catch((error) => error.message);
     }, []);
 
@@ -42,33 +46,49 @@ export function TableUsers() {
                 </TableHeader>
                 <TableBody>
                     {users.map((user) => {
+                        // if (user.role) {
+                        //     if (user.role.role_name == "admin") {
+                        //         console.log(user);
+                        //     }
+                        // }
+                        // && !(user.role.role_name == "admin")
                         return (
-                            <TableRow key={user._id}>
-                                <TableCell>
-                                    <img src={usericon} alt="" />
-                                </TableCell>
-                                <TableCell className="font-medium">
-                                    {user.username}
-                                </TableCell>
-                                <TableCell>{user.email}</TableCell>
-                                <TableCell className="text-center">
-                                    {user.hasOwnProperty("role")
-                                        ? "valide"
-                                        : "No-valide"}
-                                </TableCell>
-                                <TableCell className="flex justify-center gap-3">
-                                    <img
-                                        src={updateicon}
-                                        className="w-6"
-                                        alt=""
-                                    />
-                                    <img
-                                        src={deleteicon}
-                                        className="w-6"
-                                        alt=""
-                                    />
-                                </TableCell>
-                            </TableRow>
+                            <>
+                                {user.is_actif == true ? (
+                                    <TableRow key={user._id}>
+                                        <TableCell>
+                                            <img src={usericon} alt="" />
+                                        </TableCell>
+                                        <TableCell className="font-medium">
+                                            {user.username}
+                                        </TableCell>
+                                        <TableCell>{user.email}</TableCell>
+                                        <TableCell className="text-center">
+                                            {user.hasOwnProperty("role")
+                                                ? "valide"
+                                                : "No-valide"}
+                                        </TableCell>
+                                        <TableCell className="flex justify-center gap-3">
+                                            <Link
+                                                to={`/dash-home/users/update/${user._id}`}
+                                            >
+                                                <img
+                                                    src={updateicon}
+                                                    className="w-6"
+                                                    alt=""
+                                                />
+                                            </Link>
+                                            <img
+                                                src={deleteicon}
+                                                className="w-6"
+                                                alt=""
+                                            />
+                                        </TableCell>
+                                    </TableRow>
+                                ) : (
+                                    ""
+                                )}
+                            </>
                         );
                     })}
                 </TableBody>

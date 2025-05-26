@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/database.js";
 import cors from "cors";
 
-import courseRouters from "./routes/courseRoute.js";
+import courseRoutes from "./routes/courseRoute.js";
 import userRoutes from "./routes/userRoutes.js";
 import groupRouter from "./routes/groupRoutes.js";
 import roleRoutes from "./routes/roleRoutes.js";
@@ -20,22 +20,22 @@ app.use(cors());
 
 // Basic test route
 app.get("/", (req, res) => {
-    res.send("hello scriptman");
+  res.send("hello scriptman");
 });
 
 // API routes
 app.use("/api", userRoutes);
-app.use("/api", courseRouters);
-app.use("/api", groupRouter);
+app.use("/api", courseRoutes);
+app.use("/api/groups", groupRouter);
 app.use("/api", roleRoutes);
 
 // Connect to DB and start server
 await connectDB()
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
-    })
-    .catch((error) => {
-        console.error("Failed to connect to DB", error);
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
+  })
+  .catch((error) => {
+    console.error("Failed to connect to DB", error);
+  });

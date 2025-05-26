@@ -1,12 +1,12 @@
 import { Link } from "react-router";
-import { cn } from "../lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -17,17 +17,19 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 export function RegisterForm({
-    className,
-    ...props
+  className,
+  ...props
 }: React.ComponentProps<"div">) {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [success, setSuccess] = useState();
+    // const [passwordConferme, setPasswordConferme] = useState();
 
     const navigate = useNavigate();
-
     function sendUser(e) {
         e.preventDefault();
+
         axios
             .post("http://localhost:5000/api/register/", {
                 username,
@@ -36,13 +38,14 @@ export function RegisterForm({
             })
             .then((res) => {
                 console.log(res.data);
+                setSuccess(res.data.statusText);
                 navigate("/login");
             })
-            .catch((error) => console.log(error.message));
+            .catch((error) => {
+                console.log(error.response.data.message);
+                setSuccess(error.response.data.message);
+            });
     }
-    // useEffect(() => {
-    //
-    // }, []);
 
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -57,6 +60,11 @@ export function RegisterForm({
                     <form onSubmit={sendUser}>
                         <div className="grid gap-6">
                             <div className="grid gap-6">
+                                {success && (
+                                    <p className="bg-red-300 text-center capitalize rounded-sm p-2">
+                                        {success}
+                                    </p>
+                                )}
                                 <div className="grid gap-3">
                                     <Label htmlFor="email">UserName</Label>
                                     <Input
@@ -97,7 +105,11 @@ export function RegisterForm({
                                         }
                                     />
                                 </div>
-                                <Button type="submit" className="w-full ">
+                                
+                                <Button
+                                    type="submit"
+                                    className="w-full bg-cyan-900"
+                                >
                                     Register
                                 </Button>
                             </div>
@@ -119,6 +131,6 @@ export function RegisterForm({
                 <a href="#">Terms of Service</a> and{" "}
                 <a href="#">Privacy Policy</a>.
             </div> */}
-        </div>
-    );
+    </div>
+  );
 }

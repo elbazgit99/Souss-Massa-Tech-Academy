@@ -3,6 +3,9 @@ import Role from "../model/Role.js";
 import bcrypt from "bcryptjs";
 import validator from "validator";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Register a new user
 export const registerUser = async (req, res) => {
@@ -68,7 +71,7 @@ export const userlogin = async (req, res) => {
 
         // return res.status(201).json({ message: "login succefully", user });
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRIT, {
-            expiresIn: "30min",
+            expiresIn: "1h",
         });
         if (token) {
             return res.json({ message: "login succefully", token });

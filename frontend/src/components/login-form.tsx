@@ -31,6 +31,9 @@ export function LoginForm({
             })
             .then((res) => {
                 console.log(res.data);
+                console.log(res.data.token);
+                localStorage.setItem("token", res.data.token);
+
                 navigate("/dash-home");
             })
             .catch((error) => console.log(error.message));

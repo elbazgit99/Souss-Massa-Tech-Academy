@@ -100,11 +100,9 @@ export function TableUsers() {
                                             <Link
                                                 to={`/dash-home/users/update/${user._id}`}
                                             >
-                                                
                                                 <UserRoundPen />
                                             </Link>
 
-                                            
                                             <Trash2
                                                 className="text-red"
                                                 onClick={() => {

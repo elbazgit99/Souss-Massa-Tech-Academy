@@ -2,11 +2,11 @@ import { Link } from "react-router";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -17,8 +17,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 export function RegisterForm({
-  className,
-  ...props
+    className,
+    ...props
 }: React.ComponentProps<"div">) {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
@@ -38,12 +38,11 @@ export function RegisterForm({
             })
             .then((res) => {
                 console.log(res.data);
-                setSuccess(res.data.statusText);
                 navigate("/login");
             })
             .catch((error) => {
-                console.log(error.response.data.message);
-                setSuccess(error.response.data.message);
+                console.log(error.data.message);
+                setSuccess(error.data.message);
             });
     }
 
@@ -105,7 +104,7 @@ export function RegisterForm({
                                         }
                                     />
                                 </div>
-                                
+
                                 <Button
                                     type="submit"
                                     className="w-full bg-cyan-900"
@@ -131,6 +130,6 @@ export function RegisterForm({
                 <a href="#">Terms of Service</a> and{" "}
                 <a href="#">Privacy Policy</a>.
             </div> */}
-    </div>
-  );
+        </div>
+    );
 }

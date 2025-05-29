@@ -12,32 +12,45 @@ import {
 import { UserRoundPen, Trash2 } from "lucide-react";
 
 import axios from "axios";
-// import updateicon from "../assets/icons/pen.png";
-// import deleteicon from "../assets/icons/delete.png";
+
 import usericon from "../assets/icons/user.png";
 import { Link } from "react-router";
 import DeleteConforme from "./delete-conforme";
+import { DialogCloseButton } from "./dialog-conferme";
 
 export function TableUsers() {
     const [users, setUsers] = useState([]);
     const [popup, setPopup] = useState(false);
     const [deleteUserId, setDeleteUser] = useState("");
 
+    const token = localStorage.getItem("token");
+
     function fechUsers() {
         axios
-            .get("http://localhost:5000/api/users/")
+            .get("http://localhost:5000/api/users/", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then((data) => {
                 setUsers(data.data);
             })
             .catch((error) => error.message);
     }
+
     useEffect(() => {
         fechUsers();
     }, []);
+
     function handlDelete() {
         setPopup(true);
+
         axios
-            .delete(`http://localhost:5000/api/users/${deleteUserId}`)
+            .delete(`http://localhost:5000/api/users/${deleteUserId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then((data) => {
                 data.data;
                 setPopup(false);
@@ -82,7 +95,8 @@ export function TableUsers() {
                         // && !(user.role.role_name == "admin")
                         return (
                             <>
-                                {user.is_actif == true ? (
+                                {user.is_actif == true &&
+                                !(user.role?.role_name == "admin") ? (
                                     <TableRow key={user._id}>
                                         <TableCell>
                                             <img src={usericon} alt="" />
@@ -103,6 +117,7 @@ export function TableUsers() {
                                                 <UserRoundPen />
                                             </Link>
 
+                                            {/* <DialogCloseButton id={user._id} /> */}
                                             <Trash2
                                                 className="text-red"
                                                 onClick={() => {

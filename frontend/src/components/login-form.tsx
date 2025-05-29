@@ -12,6 +12,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useState } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router";
 
 export function LoginForm({
@@ -31,10 +32,14 @@ export function LoginForm({
             })
             .then((res) => {
                 console.log(res.data);
-                console.log(res.data.token);
+                const token = res.data.token;
                 localStorage.setItem("token", res.data.token);
 
+                const decoded = jwtDecode(token);
+                localStorage.setItem("userId", decoded.id); // store user ID
+
                 navigate("/dash-home");
+                console.log(token);
             })
             .catch((error) => console.log(error.message));
     }

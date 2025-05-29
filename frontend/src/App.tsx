@@ -9,11 +9,13 @@ import { TableUsers } from "./components/table-users";
 import UpdateUserForm from "./components/form-update";
 
 import CoursePage from "./features/layout/CoursePage";
+import PrivateRoute from "./components/private-routes";
+// import RoleRoute from "./components/RoleRoute";
 
 function App() {
     return (
         <>
-            <Routes>
+            {/* <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
@@ -23,6 +25,28 @@ function App() {
                     <Route path="/dash-home/courses" element={<CoursePage />} />
                     <Route
                         path="/dash-home/users/update/:id"
+                        element={<UpdateUserForm />}
+                    />
+                </Route>
+            </Routes> */}
+
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+
+                <Route
+                    path="/dash-home"
+                    element={
+                        <PrivateRoute>
+                            <DashHome />
+                        </PrivateRoute>
+                    }
+                >
+                    <Route path="users" element={<TableUsers />} />
+                    <Route path="courses" element={<CoursePage />} />
+                    <Route
+                        path="users/update/:id"
                         element={<UpdateUserForm />}
                     />
                 </Route>

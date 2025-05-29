@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-    // AudioWaveform,
+    LogOut,
     // Blocks,
     // Calendar,
     // Command,
@@ -21,11 +21,12 @@ import { NavMain } from "../components/nav-main";
 import logo from "/src/assets/fondation-logo.png";
 import {
     Sidebar,
-    // SidebarContent,
+    SidebarContent,
     SidebarHeader,
     SidebarRail,
 } from "../components/ui/sidebar";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { Button } from "./ui/button";
 
 // This is sample data.
 const data = {
@@ -63,6 +64,14 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const navigate = useNavigate();
+
+    const logoutHandle = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        navigate("/login");
+    };
+
     return (
         <Sidebar className="border-r-0" {...props}>
             <SidebarHeader>
@@ -79,9 +88,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
                 <NavMain items={data.navMain} />
             </SidebarHeader>
-            {/* <SidebarContent>
-                <NavSecondary items={data.navSecondary} className="mt-auto" />
-            </SidebarContent> */}
+            <SidebarContent>
+                {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
+                <div
+                    className="flex mt-auto m-3 p-2 gap-2 border-2 rounded-sm hover:bg-red-100"
+                    onClick={logoutHandle}
+                >
+                    <LogOut color="#ff0000" /> <span>Logout</span>
+                </div>
+            </SidebarContent>
             <SidebarRail />
         </Sidebar>
     );

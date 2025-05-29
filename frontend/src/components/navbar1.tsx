@@ -54,7 +54,7 @@ interface Navbar1Props {
 
 const Navbar1 = ({
     logo = {
-        url: "https://www.shadcnblocks.com",
+        url: "/",
         src: logojadara,
         alt: "logo",
         // title: "jadara",

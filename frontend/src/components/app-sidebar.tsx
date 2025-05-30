@@ -77,12 +77,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarHeader>
                 <div>
                     <Link to={"/"} className="flex items-center gap-4 mb-3">
-                        <img src={logo} alt="" className="w-9" />
-                        <span>
-                            <strong className="text-[#3054A0]">
-                                Jadara Management
-                            </strong>
-                        </span>
+                        {/* <img src={logo} alt="" className="w-9" /> */}
+                        <img
+                            src="../souss_massa_tech_logo.png"
+                            alt="Souss Massa Tech Academy"
+                            className="w-50"
+                        />
                     </Link>
                 </div>
 

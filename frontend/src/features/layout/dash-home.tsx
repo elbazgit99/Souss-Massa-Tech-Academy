@@ -10,7 +10,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function DashHome() {
-    const [user, setuser] = useState({});
+    type User = {
+        _id?: string;
+        username: string;
+        email: string;
+        is_actif?: boolean;
+        role: Role;
+    };
+    type Role = {
+        role_name: string;
+    };
+
+    const [user, setuser] = useState<User | null>(null);
     // const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
     useEffect(() => {

@@ -37,7 +37,7 @@ interface Navbar1Props {
         url: string;
         src: string;
         alt: string;
-        title: string;
+        // title: string;
     };
     menu?: MenuItem[];
     auth?: {
@@ -56,8 +56,7 @@ const Navbar1 = ({
     logo = {
         url: "/",
         src: logojadara,
-        alt: "logo",
-        // title: "jadara",
+        alt: "touss massa tech academy",
     },
     menu = [
         { title: "Home", url: "/" },
@@ -85,13 +84,11 @@ const Navbar1 = ({
                     {/* Logo */}
                     <Link to={logo.url} className="flex items-center gap-2">
                         <img
-                            src={logo.src}
-                            className="max-h-8"
+                            src="/souss_massa_tech_logo.png"
+                            // src={logo.src}
+                            className="max-h-10"
                             alt={logo.alt}
                         />
-                        <span className="text-lg font-semibold tracking-tighter">
-                            {logo.title}
-                        </span>
                     </Link>
                     <div className="flex items-center ">
                         <NavigationMenu>

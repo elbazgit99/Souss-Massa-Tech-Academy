@@ -20,14 +20,14 @@ export function RegisterForm({
     className,
     ...props
 }: React.ComponentProps<"div">) {
-    const [username, setUsername] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [success, setSuccess] = useState();
+    const [username, setUsername] = useState<string | undefined>();
+    const [email, setEmail] = useState<string | undefined>();
+    const [password, setPassword] = useState<string | undefined>();
+    const [success, setSuccess] = useState<boolean | undefined>();
     // const [passwordConferme, setPasswordConferme] = useState();
 
     const navigate = useNavigate();
-    function sendUser(e) {
+    function sendUser(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
 
         axios
@@ -56,7 +56,11 @@ export function RegisterForm({
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={sendUser}>
+                    <form
+                        onSubmit={() => {
+                            sendUser;
+                        }}
+                    >
                         <div className="grid gap-6">
                             <div className="grid gap-6">
                                 {success && (

@@ -16,15 +16,26 @@ import axios from "axios";
 import usericon from "../assets/icons/user.png";
 import { Link } from "react-router";
 import DeleteConforme from "./delete-conforme";
-import { DialogCloseButton } from "./dialog-conferme";
+// import { DialogCloseButton } from "./dialog-conferme";
 
 export function TableUsers() {
-    const [users, setUsers] = useState([]);
+    type User = {
+        _id: string;
+        username: string;
+        email: string;
+        is_actif: boolean;
+        role: Role;
+    };
+    type Role = {
+        role_name: string;
+    };
+
+    const [users, setUsers] = useState<User[]>([]);
     const [popup, setPopup] = useState(false);
     const [deleteUserId, setDeleteUser] = useState("");
 
     const token = localStorage.getItem("token");
-
+    console.log(users.length);
     function fechUsers() {
         axios
             .get("http://localhost:5000/api/users/", {
@@ -76,6 +87,7 @@ export function TableUsers() {
             <Table className="border-2 border-yellow-100 ">
                 <TableHeader className="capitalize">
                     <TableRow style={{ backgroundColor: "#F7EF79" }}>
+                        <TableHead className="w-[40px]">N°</TableHead>
                         <TableHead className="w-[40px]"></TableHead>
                         <TableHead className="w-[140px]">Username</TableHead>
                         <TableHead>email</TableHead>
@@ -86,18 +98,13 @@ export function TableUsers() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {users.map((user) => {
-                        // if (user.role) {
-                        //     if (user.role.role_name == "admin") {
-                        //         console.log(user);
-                        //     }
-                        // }
-                        // && !(user.role.role_name == "admin")
+                    {users.map((user, index) => {
                         return (
                             <>
                                 {user.is_actif == true &&
                                 !(user.role?.role_name == "admin") ? (
                                     <TableRow key={user._id}>
+                                        <TableCell>{index}</TableCell>
                                         <TableCell>
                                             <img src={usericon} alt="" />
                                         </TableCell>

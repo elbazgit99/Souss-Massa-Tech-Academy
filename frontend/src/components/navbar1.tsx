@@ -1,5 +1,5 @@
 import { Menu } from "lucide-react";
-import logojadara from "../assets/logo-jadara.png";
+import logosmta from "/public/souss_massa_tech_logo.png";
 import {
     Accordion,
     AccordionContent,
@@ -55,7 +55,7 @@ interface Navbar1Props {
 const Navbar1 = ({
     logo = {
         url: "/",
-        src: logojadara,
+        src: logosmta,
         alt: "touss massa tech academy",
     },
     menu = [
@@ -84,8 +84,7 @@ const Navbar1 = ({
                     {/* Logo */}
                     <Link to={logo.url} className="flex items-center gap-2">
                         <img
-                            src="/souss_massa_tech_logo.png"
-                            // src={logo.src}
+                            src={logo.src}
                             className="max-h-10"
                             alt={logo.alt}
                         />

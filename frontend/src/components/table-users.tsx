@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import {
     Table,
     TableBody,
-    // TableCaption,
     TableCell,
     // TableFooter,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { UserRoundPen, Trash2 } from "lucide-react";
+import { UserRoundPen, Trash2, ShieldCheck, ShieldBan } from "lucide-react";
 
 import axios from "axios";
 
@@ -86,7 +85,7 @@ export function TableUsers() {
 
             <Table className="border-2 border-yellow-100 ">
                 <TableHeader className="capitalize">
-                    <TableRow style={{ backgroundColor: "#F7EF79" }}>
+                    <TableRow className="bg-yellow-100">
                         <TableHead className="w-[40px]"></TableHead>
                         <TableHead className="w-[140px]">Username</TableHead>
                         <TableHead>email</TableHead>
@@ -100,20 +99,24 @@ export function TableUsers() {
                     {users.map((user) => {
                         return (
                             <>
-                                {user.is_actif == true &&
-                                !(user.role?.role_name == "admin") ? (
+                                {!(user.role?.role_name == "admin") ? (
                                     <TableRow key={user._id}>
                                         <TableCell>
                                             <img src={usericon} alt="" />
                                         </TableCell>
-                                        <TableCell className="font-medium">
+                                        <TableCell className="font-medium capitalize">
                                             {user.username}
                                         </TableCell>
                                         <TableCell>{user.email}</TableCell>
-                                        <TableCell className="text-center">
-                                            {user.hasOwnProperty("role")
+                                        <TableCell>
+                                            {/* {user.hasOwnProperty("role")
                                                 ? "valide"
-                                                : "No-valide"}
+                                                : "No-valide"} */}
+                                            {user.is_actif == true ? (
+                                                <ShieldCheck color="green" />
+                                            ) : (
+                                                <ShieldBan color="red" />
+                                            )}
                                         </TableCell>
                                         <TableCell className="flex justify-center gap-3">
                                             <Link
@@ -124,7 +127,7 @@ export function TableUsers() {
 
                                             {/* <DialogCloseButton id={user._id} /> */}
                                             <Trash2
-                                                className="text-red"
+                                                color="red"
                                                 onClick={() => {
                                                     setDeleteUser(
                                                         `${user._id}`

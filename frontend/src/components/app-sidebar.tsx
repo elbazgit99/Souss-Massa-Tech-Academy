@@ -56,7 +56,7 @@ const data = {
         },
         {
             title: "Groups",
-            url: "/dash-home/courses",
+            url: "/dash-home/groups",
             icon: Boxes,
             badge: "10",
         },

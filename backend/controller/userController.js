@@ -1,14 +1,16 @@
 import User from "../model/User.js";
+import Role from "../model/Role.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import validator from "validator";
 
 dotenv.config();
 
 // Register a new user
 export const registerUser = async (req, res) => {
     try {
-        const { email, password, username } = req.body;
+        const { email, password, username, role } = req.body;
 
         // validation
         if (!email || !password) {
@@ -47,7 +49,8 @@ export const registerUser = async (req, res) => {
             message: "User registered successfully",
         });
     } catch (error) {
-        res.status(500).json({ message: "Server error", error });
+        console.error("Registration error:", error.message);
+        res.status(500).json({ message: error.message || "Server error" });
     }
 };
 

@@ -87,7 +87,6 @@ export function TableUsers() {
             <Table className="border-2 border-yellow-100 ">
                 <TableHeader className="capitalize">
                     <TableRow style={{ backgroundColor: "#F7EF79" }}>
-                        <TableHead className="w-[40px]">N°</TableHead>
                         <TableHead className="w-[40px]"></TableHead>
                         <TableHead className="w-[140px]">Username</TableHead>
                         <TableHead>email</TableHead>
@@ -98,13 +97,12 @@ export function TableUsers() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {users.map((user, index) => {
+                    {users.map((user) => {
                         return (
                             <>
                                 {user.is_actif == true &&
                                 !(user.role?.role_name == "admin") ? (
                                     <TableRow key={user._id}>
-                                        <TableCell>{index}</TableCell>
                                         <TableCell>
                                             <img src={usericon} alt="" />
                                         </TableCell>

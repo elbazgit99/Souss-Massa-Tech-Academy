@@ -61,7 +61,10 @@ export default function UpdateUserForm() {
                     </div>
 
                      */}
-                    <h2 className="p-4 mb-2"> Update Information of user :</h2>
+                    <h2 className="capitalize text-sky-900 text-xl font-bold py-2 mb-2">
+                        {" "}
+                        Update Information of user :
+                    </h2>
                     <Input
                         value={updatename}
                         onChange={(e) => setupdatename(e.target.value)}

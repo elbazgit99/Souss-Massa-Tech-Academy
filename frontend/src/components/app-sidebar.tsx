@@ -18,7 +18,6 @@ import {
 
 import { NavMain } from "../components/nav-main";
 // import { NavSecondary } from "../components/nav-secondary";
-import logo from "/src/assets/fondation-logo.png";
 import {
     Sidebar,
     SidebarContent,

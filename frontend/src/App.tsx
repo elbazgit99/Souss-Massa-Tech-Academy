@@ -18,8 +18,8 @@ import DashHomePage from "./components/home-dash";
 function App() {
     return (
         <>
-        <ThemeProvider defaultTheme="light">
-        <ModeToggle />
+            {/* <ThemeProvider defaultTheme="light">
+        <ModeToggle /> */}
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
@@ -43,7 +43,7 @@ function App() {
                     />
                 </Route>
             </Routes>
-            </ThemeProvider>
+            {/* </ThemeProvider> */}
         </>
     );
 }

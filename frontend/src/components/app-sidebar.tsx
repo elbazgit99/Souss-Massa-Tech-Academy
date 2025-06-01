@@ -1,23 +1,15 @@
-import * as React from "react";
+// import * as React from "react";
 import {
     LogOut,
-    // Blocks,
-    // Calendar,
-    // Command,
     Home,
     Users,
-    // MessageCircleQuestion,
-    // Search,
-    // Settings2,
-
-    // Trash2,
     BookOpenText,
     Boxes,
-    // Trash2,
+    UserRound,
 } from "lucide-react";
 
 import { NavMain } from "../components/nav-main";
-// import { NavSecondary } from "../components/nav-secondary";
+import { useContext } from "react";
 import {
     Sidebar,
     SidebarContent,
@@ -25,22 +17,29 @@ import {
     SidebarRail,
 } from "../components/ui/sidebar";
 import { Link, useNavigate } from "react-router";
-import { Button } from "./ui/button";
+import { AutContext } from "@/context/userContext";
 
 // This is sample data.
 const data = {
-    navMain: [
+    navStudent: [
+        { title: "Home", url: "/student/", icon: Home },
+        { title: "Profile", url: "/student/profile", icon: UserRound },
+
+        {
+            title: "Course",
+            url: "/student/course",
+            icon: BookOpenText,
+            badge: "10",
+        },
+        { title: "Group", url: "/student/group", icon: Boxes, badge: "10" },
+    ],
+    navAdmin: [
         {
             title: "Home",
             url: "/dash-home/",
             icon: Home,
             // isActive: true,
         },
-        // {
-        //     title: "Search",
-        //     url: "#",
-        //     icon: Search,
-        // },
         {
             title: "Users",
             url: "/dash-home/users",
@@ -64,6 +63,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const navigate = useNavigate();
+    const { role } = useContext(AutContext);
 
     const logoutHandle = () => {
         localStorage.removeItem("token");
@@ -85,7 +85,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     </Link>
                 </div>
 
-                <NavMain items={data.navMain} />
+                <NavMain
+                    items={role === "admin" ? data.navAdmin : data.navStudent}
+                />
             </SidebarHeader>
             <SidebarContent>
                 {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}

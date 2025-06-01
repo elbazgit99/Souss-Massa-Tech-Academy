@@ -10,16 +10,20 @@ import {
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
+import { AutContext } from "@/context/userContext";
 
 export function LoginForm({
     className,
     ...props
 }: React.ComponentProps<"div">) {
     const navigate = useNavigate();
+    const { setToken } = useContext(AutContext);
+
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -34,21 +38,26 @@ export function LoginForm({
                 // console.log(res.data);
                 const token = res.data.token;
                 localStorage.setItem("token", res.data.token);
+                setToken(token);
+                toast.success(res.data.message);
 
                 const decoded = jwtDecode(token);
                 localStorage.setItem("userId", decoded.id); // store user ID
-
-                navigate("/dash-home");
+                if (decoded.role == "admin") {
+                    navigate("/dash-home");
+                } else if (decoded.role == "student") {
+                    navigate("/student");
+                }
                 // console.log(token);
             })
-            .catch((error) => console.log(error.message));
+            .catch((error) => {
+                toast.error(error.response.data.message);
+            });
     }
 
-    useEffect(() => {
-        if (localStorage.getItem("token")) {
-            navigate("/dash-home");
-        }
-    }, []);
+    // useEffect(() => {
+    //     loginUser;
+    // }, []);
     //     const token = localStorage.getItem("accessToken");
     //   return !!token;
     return (

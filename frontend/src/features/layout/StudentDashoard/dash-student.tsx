@@ -1,16 +1,15 @@
 import { Outlet } from "react-router";
-import { AppSidebar } from "../../components/app-sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar";
-import adminImg from "../../assets/admin.png";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import adminImg from "../../../assets/admin.png";
+import { useContext } from "react";
 import { AutContext } from "@/context/userContext";
 
-export default function DashHome() {
+export default function DashStudent() {
     const { user } = useContext(AutContext);
 
     return (
@@ -20,18 +19,17 @@ export default function DashHome() {
                 <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 shadow-sm mb-5">
                     <div className="flex justify-between items-center gap-2 px-4 w-full ">
                         <SidebarTrigger className="-ml-1" />
-
-                        <div className="flex items-center gap-3">
+                        <div className="flex  items-center gap-2">
                             <img
-                                alt={user && user.username}
+                                alt="admin"
                                 src={adminImg}
-                                className="w-10 h-10 rounded-full ring-2 ring-sky-500 object-cover shadow-sm cursor-pointer"
+                                className="inline-block size-8 rounded-full ring-2 ring-white cursor-pointer"
                             />
-                            <div className="flex flex-col leading-tight">
-                                <span className="capitalize text-sm font-semibold text-gray-900">
+                            <div className="flex flex-col">
+                                <span className="text-neutral-800">
                                     {user && user.username}
                                 </span>
-                                <span className="text-xs text-gray-500 capitalize">
+                                <span className="text-neutral-500 text-xs">
                                     {user && user.role?.role_name}
                                 </span>
                             </div>

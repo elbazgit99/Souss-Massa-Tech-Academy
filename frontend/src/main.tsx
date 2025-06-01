@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router";
 import { Toaster } from "@/components/ui/sonner";
+import UserContext from "./context/userContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-      <Toaster richColors closeButton />
-    </BrowserRouter>
-  </StrictMode>
+    <StrictMode>
+        <UserContext>
+            <BrowserRouter>
+                <App />
+                <Toaster richColors closeButton />
+            </BrowserRouter>
+        </UserContext>
+    </StrictMode>
 );

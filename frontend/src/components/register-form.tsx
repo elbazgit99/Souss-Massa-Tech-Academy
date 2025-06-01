@@ -15,6 +15,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 export function RegisterForm({
     className,
@@ -23,7 +24,7 @@ export function RegisterForm({
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState<string | undefined>("");
     const [password, setPassword] = useState<string | undefined>("");
-    const [success, setSuccess] = useState<boolean | undefined>();
+
     // const [passwordConferme, setPasswordConferme] = useState();
 
     const navigate = useNavigate();
@@ -37,12 +38,12 @@ export function RegisterForm({
                 password,
             })
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
+                toast.success(`register successfully!`);
                 navigate("/login");
             })
             .catch((error) => {
-                console.log(error.data.message);
-                setSuccess(error.data.message);
+                toast.error(error.response.data.message);
             });
     }
 
@@ -59,11 +60,6 @@ export function RegisterForm({
                     <form onSubmit={sendUser}>
                         <div className="grid gap-6">
                             <div className="grid gap-6">
-                                {success && (
-                                    <p className="bg-red-300 text-center capitalize rounded-sm p-2">
-                                        {success}
-                                    </p>
-                                )}
                                 <div className="grid gap-3">
                                     <Label htmlFor="email">UserName</Label>
                                     <Input

@@ -49,49 +49,34 @@ export default function UpdateUserForm() {
 
     return (
         <>
-            <div className="">
-                <form
-                    onSubmit={update}
-                    className="bg-white m-auto w-md border-2 p-4 size-max"
-                >
-                    {/* <div>
-                        <h3>OLD information</h3>
-                        <p>Email : {user.email} </p>
-                        <p>Username : {user.username} </p>
-                    </div>
+            <form
+                onSubmit={update}
+                className="bg-white max-w-md mx-auto mt-10 rounded-2xl shadow-lg border border-gray-200 p-6 space-y-4"
+            >
+                <h2 className="text-2xl font-semibold text-sky-900 mb-4">
+                    Update User Information
+                </h2>
 
-                     */}
-                    <h2 className="capitalize text-sky-900 text-xl font-bold py-2 mb-2">
-                        {" "}
-                        Update Information of user :
-                    </h2>
-                    <Input
-                        value={updatename}
-                        onChange={(e) => setupdatename(e.target.value)}
-                        type="text"
-                        className="mb-3"
-                        placeholder="username"
-                    />
-                    <Input
-                        onChange={(e) => setupdateEmail(e.target.value)}
-                        type="text"
-                        className="mb-3"
-                        placeholder="email"
-                        value={updateEmail}
-                    />
+                <Input
+                    value={updatename}
+                    onChange={(e) => setupdatename(e.target.value)}
+                    type="text"
+                    placeholder="Username"
+                    className="w-full"
+                />
 
-                    {/* <Input type="text" className="mb-3" value={user.is_actif} /> */}
-                    {/* <div>
-                        <label htmlFor="role">Choose a course:</label>
-                        <select id="role">
-                            <option>...</option>
-                            <option>course 1</option>
-                            <option>course 1</option>
-                        </select>
-                    </div> */}
-                    <Button className="">Update</Button>
-                </form>
-            </div>
+                <Input
+                    value={updateEmail}
+                    onChange={(e) => setupdateEmail(e.target.value)}
+                    type="email"
+                    placeholder="Email"
+                    className="w-full"
+                />
+
+                <Button className="w-full bg-sky-600 hover:bg-sky-700 text-white font-medium py-2 rounded-lg">
+                    Update
+                </Button>
+            </form>
         </>
     );
 }

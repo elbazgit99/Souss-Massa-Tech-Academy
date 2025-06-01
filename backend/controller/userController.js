@@ -60,20 +60,28 @@ export const userlogin = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).populate("role");
         if (!user) {
-            return res.status(400).json({ message: "invalid email " });
+            return res
+                .status(400)
+                .json({ message: "Invalid email or password. " });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: "invalid password" });
+            return res
+                .status(400)
+                .json({ message: "Invalid email or password." });
         }
 
         // return res.status(201).json({ message: "login succefully", user });
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRIT, {
-            expiresIn: "12h",
-        });
+        const token = jwt.sign(
+            { id: user._id, role: user.role.role_name },
+            process.env.JWT_SECRIT,
+            {
+                expiresIn: "8h",
+            }
+        );
         if (token) {
             return res.json({ message: "login succefully", token });
         }

@@ -83,66 +83,73 @@ export function TableUsers() {
                 />
             )}
 
-            <Table className="border-2 border-yellow-100 ">
-                <TableHeader className="capitalize">
-                    <TableRow className="bg-yellow-100">
-                        <TableHead className="w-[40px]"></TableHead>
+            <Table className="border border-yellow-200 rounded-md shadow-sm">
+                <TableHeader>
+                    <TableRow className="bg-yellow-100 text-sky-900 uppercase text-sm">
+                        <TableHead className="w-[40px] text-center"></TableHead>
                         <TableHead className="w-[140px]">Username</TableHead>
-                        <TableHead>email</TableHead>
+                        <TableHead>Email</TableHead>
                         <TableHead className="text-center">Status</TableHead>
                         <TableHead className="text-center">
-                            update / delete
+                            Update / Delete
                         </TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
-                    {users.map((user) => {
-                        return (
-                            <>
-                                {!(user.role?.role_name == "admin") ? (
-                                    <TableRow key={user._id}>
-                                        <TableCell>
-                                            <img src={usericon} alt="" />
-                                        </TableCell>
-                                        <TableCell className="font-medium capitalize">
-                                            {user.username}
-                                        </TableCell>
-                                        <TableCell>{user.email}</TableCell>
-                                        <TableCell>
-                                            {/* {user.hasOwnProperty("role")
-                                                ? "valide"
-                                                : "No-valide"} */}
-                                            {user.is_actif == true ? (
-                                                <ShieldCheck color="green" />
-                                            ) : (
-                                                <ShieldBan color="red" />
-                                            )}
-                                        </TableCell>
-                                        <TableCell className="flex justify-center gap-3">
-                                            <Link
-                                                to={`/dash-home/users/update/${user._id}`}
-                                            >
-                                                <UserRoundPen />
-                                            </Link>
 
-                                            {/* <DialogCloseButton id={user._id} /> */}
-                                            <Trash2
-                                                color="red"
-                                                onClick={() => {
-                                                    setDeleteUser(
-                                                        `${user._id}`
-                                                    );
-                                                    setPopup(true);
-                                                }}
-                                            />
-                                        </TableCell>
-                                    </TableRow>
-                                ) : (
-                                    ""
-                                )}
-                            </>
-                        );
-                    })}
+                <TableBody>
+                    {users.map((user) =>
+                        user.role?.role_name !== "admin" ? (
+                            <TableRow
+                                key={user._id}
+                                className="hover:bg-yellow-50 transition"
+                            >
+                                <TableCell className="text-center">
+                                    <img
+                                        src={usericon}
+                                        alt="user"
+                                        className="w-8 h-8 rounded-full mx-auto"
+                                    />
+                                </TableCell>
+
+                                <TableCell className="capitalize font-medium">
+                                    {user.username}
+                                </TableCell>
+                                <TableCell className="text-gray-700">
+                                    {user.email}
+                                </TableCell>
+
+                                <TableCell className="text-center">
+                                    {user.is_actif ? (
+                                        <span className="inline-block bg-green-100 text-green-700 px-3 py-1 text-sm rounded-full font-medium">
+                                            Active
+                                        </span>
+                                    ) : (
+                                        <span className="inline-block bg-red-100 text-red-700 px-3 py-1 text-sm rounded-full font-medium">
+                                            Inactive
+                                        </span>
+                                    )}
+                                </TableCell>
+
+                                <TableCell>
+                                    <div className="flex justify-center gap-4">
+                                        <Link
+                                            to={`/dash-home/users/update/${user._id}`}
+                                        >
+                                            <UserRoundPen className="text-blue-600 hover:text-blue-800 cursor-pointer" />
+                                        </Link>
+
+                                        <Trash2
+                                            className="text-red-600 hover:text-red-800 cursor-pointer"
+                                            onClick={() => {
+                                                setDeleteUser(user._id);
+                                                setPopup(true);
+                                            }}
+                                        />
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        ) : null
+                    )}
                 </TableBody>
             </Table>
         </div>

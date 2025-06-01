@@ -30,7 +30,7 @@ export const getAllGroups = async (req, res) => {
             })
             .populate({
                 path: "course_id",
-                select: "title",
+                // select: "title",
             });
         res.status(200).json(groups);
     } catch (err) {

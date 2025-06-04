@@ -27,19 +27,7 @@
 git clone https://github.com/Essoufimohamed/sms-jadara.git
 cd sms-jadara
 
-
-<h2>Create a .env file and add :</h2>
-<ul>
-  <li>
-PORT=5000
-    
-  </li>
-  <li>
-    
-MONGO_URI=your_mongodb_uri
-  </li>
-  <li>
-    
-JWT_SECRET=your_jwt_secret
-  </li>
-</ul>
+Create a .env file and add :  
+ - PORT=5000    
+ - MONGO_URI=your_mongodb_uri
+ - JWT_SECRET=your_jwt_secret
